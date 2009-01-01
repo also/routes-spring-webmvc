@@ -11,7 +11,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.web.servlet.handler.AbstractHandlerMapping;
 import org.springframework.web.util.UrlPathHelper;
 
-import com.ryanberdeen.routes.Mapping;
+import com.ryanberdeen.routes.HttpServletRequestMapping;
 import com.ryanberdeen.routes.Route;
 import com.ryanberdeen.routes.RouteSet;
 import com.ryanberdeen.routes.RouteUtils;
@@ -34,9 +34,9 @@ public class RouteHandlerMapping extends AbstractHandlerMapping implements Initi
 	public RouteHandlerMapping() {
 		routeSet = new RouteSet();
 		specialRoutes = new HashMap<Route, Object>();
-		javascriptRoute = new Route(javascriptRouteUri, Mapping.EMPTY_PARAMETERS, Mapping.EMPTY_PARAMETERS);
+		javascriptRoute = new Route(javascriptRouteUri, HttpServletRequestMapping.EMPTY_PARAMETERS, HttpServletRequestMapping.EMPTY_PARAMETERS);
 		javascriptRoute.setName(javascriptRouteName);
-		
+
 		specialRoutes.put(javascriptRoute, new RouteJavascriptController(routeSet));
 	}
 

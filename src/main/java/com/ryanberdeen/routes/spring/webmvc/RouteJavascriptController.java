@@ -7,14 +7,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 import org.springframework.web.servlet.mvc.LastModified;
 
-import com.ryanberdeen.routes.Mapping;
+import com.ryanberdeen.routes.HttpServletRequestMapping;
 import com.ryanberdeen.routes.RouteJavascriptGenerator;
 
 public class RouteJavascriptController implements Controller, LastModified {
 	private RouteJavascriptGenerator routeJavascriptGenerator;
 	private long lastModified;
 
-	public RouteJavascriptController(Mapping mapping) {
+	public RouteJavascriptController(HttpServletRequestMapping mapping) {
 		routeJavascriptGenerator = new RouteJavascriptGenerator(mapping);
 		lastModified = System.currentTimeMillis();
 	}
