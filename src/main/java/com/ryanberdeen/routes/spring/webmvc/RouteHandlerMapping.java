@@ -27,22 +27,30 @@ public class RouteHandlerMapping extends AbstractHandlerMapping implements Initi
 
 	private HashMap<Route, Object> specialRoutes;
 
+	private RouteJavascriptController routeJavascriptController;
 	private String javascriptRouteName = "routes.js";
 	private String javascriptRouteUri = "/routes.js";
 	private Route javascriptRoute;
 
 	public RouteHandlerMapping() {
-		routeSet = new RouteSet();
 		specialRoutes = new HashMap<Route, Object>();
 		javascriptRoute = new Route(javascriptRouteUri, HttpServletRequestMapping.EMPTY_PARAMETERS, HttpServletRequestMapping.EMPTY_PARAMETERS);
 		javascriptRoute.setName(javascriptRouteName);
 
-		specialRoutes.put(javascriptRoute, new RouteJavascriptController(routeSet));
+		routeJavascriptController = new RouteJavascriptController();
+		specialRoutes.put(javascriptRoute, routeJavascriptController);
 	}
 
 	public void setRoutes(List<Route> routes) {
+		RouteSet routeSet = new RouteSet();
 		routeSet.setRoutes(routes);
+		setRouteSet(routeSet);
+	}
+
+	public void setRouteSet(RouteSet routeSet) {
+		this.routeSet = routeSet;
 		routeSet.addRoute(javascriptRoute);
+		routeJavascriptController.setMapping(routeSet);
 	}
 
 	public void setControllerParameterName(String controllerParameterName) {

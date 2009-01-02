@@ -14,9 +14,13 @@ public class RouteJavascriptController implements Controller, LastModified {
 	private RouteJavascriptGenerator routeJavascriptGenerator;
 	private long lastModified;
 
-	public RouteJavascriptController(HttpServletRequestMapping mapping) {
-		routeJavascriptGenerator = new RouteJavascriptGenerator(mapping);
+	public RouteJavascriptController() {
+		routeJavascriptGenerator = new RouteJavascriptGenerator();
 		lastModified = System.currentTimeMillis();
+	}
+
+	public void setMapping(HttpServletRequestMapping mapping) {
+		routeJavascriptGenerator.setMapping(mapping);
 	}
 
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
